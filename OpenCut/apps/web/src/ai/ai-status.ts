@@ -1,28 +1,22 @@
+import { createAIClient } from '@opencut-studio/ai-client'
+import type { AIBackendStatus } from '@opencut-studio/ai-types'
+
+export type { AIBackendStatus } from '@opencut-studio/ai-types'
+
 export type AIConnectionState = 'checking' | 'connected' | 'disconnected'
 
-export interface AIBackendStatus {
-  available: boolean
-  models: string[]
-  gpuAvailable: boolean
-  services?: string[]
-  version?: string
-  error?: string
-}
-
-const DEFAULT_AI_BACKEND_URL = 'http://localhost:8420'
+const aiClient = createAIClient()
 
 export function getAIBackendUrl() {
-  return import.meta.env.VITE_AI_BACKEND_URL || DEFAULT_AI_BACKEND_URL
+  return aiClient.getBaseUrl()
 }
 
 export async function fetchAIBackendStatus(
   signal?: AbortSignal,
 ): Promise<AIBackendStatus> {
-  const response = await fetch(`${getAIBackendUrl()}/health`, { signal })
-
-  if (!response.ok) {
-    throw new Error(`AI backend returned HTTP ${response.status}`)
+  if (signal?.aborted) {
+    throw new DOMException('Request aborted', 'AbortError')
   }
 
-  return response.json() as Promise<AIBackendStatus>
+  return aiClient.health()
 }
