@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { AIStatusIndicator } from '#/components/ai/ai-status-indicator'
+import { AITranscriptionPanel } from '#/components/ai/ai-transcription-panel'
 
 export const Route = createFileRoute('/')({ component: Home })
 
@@ -17,9 +18,8 @@ function Home() {
                 Editor principal com motor de IA
               </h1>
               <p className="mt-4 max-w-2xl text-base text-muted-foreground">
-                Esta tela confirma a primeira ponte entre o OpenCut e o backend
-                FastAPI do OpenCut-AI. A próxima etapa é transformar esse status
-                em ferramentas de transcrição e comando de timeline.
+                Esta tela valida os primeiros fluxos entre o OpenCut e o backend
+                FastAPI do OpenCut-AI: status do serviço e transcrição automática.
               </p>
             </div>
             <AIStatusIndicator compact />
@@ -27,6 +27,8 @@ function Home() {
         </header>
 
         <AIStatusIndicator />
+
+        <AITranscriptionPanel />
 
         <section className="grid gap-4 md:grid-cols-3">
           <IntegrationCard
@@ -37,6 +39,7 @@ function Home() {
           <IntegrationCard
             title="2. Transcrição"
             description="Enviar mídia para /api/transcribe e receber segmentos."
+            done
           />
           <IntegrationCard
             title="3. Comandos"
