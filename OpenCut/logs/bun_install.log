@@ -1,0 +1,12 @@
+
+changed 17 packages in 4s
+error: Bun could not find a package.json file to install from
+note: Run "bun init" to initialize a project
+error: Bun could not find a package.json file to install from
+note: Run "bun init" to initialize a project
+Installing API deps... 
+bun install v1.3.14 (0d9b296a)
+Resolving dependencies
+error: Fail extracting tarball for "@cloudflare/workers-types"
+Resolved, downloaded and extracted [297]
+error: Fail extracting tarball from @cloudflare/workers-types
