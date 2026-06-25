@@ -1,0 +1,38 @@
+{
+	"name": "OpenCut AI",
+	"short_name": "OpenCut AI",
+	"description": "Open-source AI video editor. Transcribe, edit by text, clone voices, and generate visuals. Runs locally on your machine.",
+	"display": "standalone",
+	"start_url": "/",
+	"theme_color": "#2567EC",
+	"background_color": "#0d0d0d",
+	"icons": [
+		{
+			"src": "/icons/favicon-32x32.png",
+			"sizes": "32x32",
+			"type": "image/png"
+		},
+		{
+			"src": "/icons/favicon-96x96.png",
+			"sizes": "96x96",
+			"type": "image/png"
+		},
+		{
+			"src": "/icons/apple-icon-144x144.png",
+			"sizes": "144x144",
+			"type": "image/png"
+		},
+		{
+			"src": "/icons/icon-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "any maskable"
+		},
+		{
+			"src": "/icons/icon-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any maskable"
+		}
+	]
+}

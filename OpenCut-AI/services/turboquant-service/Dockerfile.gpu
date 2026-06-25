@@ -1,0 +1,36 @@
+FROM python:3.11-slim
+
+COPY --from=ghcr.io/astral-sh/uv:0.9.28 /uv /uvx /bin/
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+ARG TURBOQUANT_EXTRAS=""
+
+COPY requirements.txt requirements.lock* ./
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=cache,target=/root/.cache/pip \
+    if [ -f requirements.lock ]; then \
+      uv pip install --system -r requirements.lock ; \
+    else \
+      uv pip install --system -r requirements.txt ; \
+    fi \
+ && if [ -n "$TURBOQUANT_EXTRAS" ]; then \
+      uv pip install --system \
+        --index-strategy unsafe-best-match \
+        "turboquant-gpu[$TURBOQUANT_EXTRAS]" \
+        --extra-index-url https://pypi.nvidia.com ; \
+    fi
+
+COPY app.py compute_backends.py ./
+
+RUN mkdir -p /app/models
+ENV HF_HOME=/app/models
+ENV TRANSFORMERS_CACHE=/app/models
+
+EXPOSE 8430
+
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8430"]

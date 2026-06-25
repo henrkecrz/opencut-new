@@ -1,0 +1,411 @@
+time="2026-06-25T02:13:02-03:00" level=warning msg="The \"FREESOUND_CLIENT_ID\" variable is not set. Defaulting to a blank string."
+time="2026-06-25T02:13:02-03:00" level=warning msg="The \"FREESOUND_API_KEY\" variable is not set. Defaulting to a blank string."
+time="2026-06-25T02:13:02-03:00" level=warning msg="The \"FREESOUND_CLIENT_ID\" variable is not set. Defaulting to a blank string."
+time="2026-06-25T02:13:02-03:00" level=warning msg="The \"FREESOUND_API_KEY\" variable is not set. Defaulting to a blank string."
+#1 [internal] load local bake definitions
+#1 reading from stdin 4.93kB 0.0s done
+#1 DONE 0.0s
+
+#2 [tts-service internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.02kB done
+#2 DONE 0.1s
+
+#3 [ai-backend internal] load build definition from Dockerfile
+#3 transferring dockerfile: 660B done
+#3 DONE 0.2s
+
+#4 [clip-service internal] load build definition from Dockerfile
+#4 transferring dockerfile: 958B done
+#4 DONE 0.2s
+
+#5 [turboquant-service internal] load build definition from Dockerfile
+#5 transferring dockerfile: 1.25kB done
+#5 DONE 0.2s
+
+#6 [face-service internal] load build definition from Dockerfile
+#6 transferring dockerfile: 704B done
+#6 DONE 0.2s
+
+#7 [whisper-service internal] load build definition from Dockerfile
+#7 transferring dockerfile: 661B done
+#7 DONE 0.2s
+
+#8 [speaker-service internal] load build definition from Dockerfile
+#8 transferring dockerfile: 957B done
+#8 DONE 0.2s
+
+#9 [turboquant-service internal] load metadata for ghcr.io/astral-sh/uv:0.9.28
+#9 ...
+
+#10 [image-service internal] load build definition from Dockerfile
+#10 transferring dockerfile: 968B done
+#10 DONE 0.2s
+
+#11 [web internal] load build definition from Dockerfile
+#11 transferring dockerfile: 2.15kB done
+#11 DONE 0.2s
+
+#9 [image-service internal] load metadata for ghcr.io/astral-sh/uv:0.9.28
+#9 DONE 2.4s
+
+#12 [speaker-service internal] load metadata for docker.io/library/python:3.11-slim
+#12 DONE 2.3s
+
+#13 [web internal] load metadata for docker.io/oven/bun:alpine
+#13 DONE 2.2s
+
+#14 [web internal] load metadata for docker.io/library/node:20-alpine
+#14 DONE 2.2s
+
+#15 [web internal] load .dockerignore
+#15 transferring context: 451B done
+#15 DONE 0.0s
+
+#16 [web internal] load build context
+#16 DONE 0.0s
+
+#17 [speaker-service internal] load .dockerignore
+#17 ...
+
+#18 [tts-service internal] load .dockerignore
+#18 transferring context: 105B done
+#18 DONE 0.2s
+
+#19 [tts-service internal] load build context
+#19 DONE 0.0s
+
+#17 [speaker-service internal] load .dockerignore
+#17 transferring context: 105B done
+#17 DONE 0.3s
+
+#20 [image-service internal] load .dockerignore
+#20 transferring context: 105B done
+#20 DONE 0.2s
+
+#21 [face-service internal] load .dockerignore
+#21 transferring context: 105B done
+#21 DONE 0.3s
+
+#22 [whisper-service internal] load .dockerignore
+#22 transferring context: 105B done
+#22 DONE 0.3s
+
+#23 [turboquant-service internal] load .dockerignore
+#23 transferring context: 105B done
+#23 DONE 0.3s
+
+#24 [face-service internal] load build context
+#24 ...
+
+#25 [clip-service internal] load .dockerignore
+#25 transferring context: 105B 0.0s done
+#25 DONE 0.3s
+
+#26 [ai-backend internal] load .dockerignore
+#26 transferring context: 112B 0.0s done
+#26 DONE 0.3s
+
+#27 [ai-backend stage-0 1/8] FROM docker.io/library/python:3.11-slim@sha256:cdbd05fb6f457ca275ff51ce00d93d865ca0b6a25f5ffb08262d94f6835771e5
+#27 resolve docker.io/library/python:3.11-slim@sha256:cdbd05fb6f457ca275ff51ce00d93d865ca0b6a25f5ffb08262d94f6835771e5 0.1s done
+#27 ...
+
+#19 [tts-service internal] load build context
+#19 transferring context: 29.66kB 0.0s done
+#19 DONE 0.5s
+
+#28 [image-service internal] load build context
+#28 transferring context: 24.84kB 0.0s done
+#28 DONE 0.5s
+
+#29 [image-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 resolve ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb 0.1s done
+#29 DONE 0.6s
+
+#30 [clip-service internal] load build context
+#30 transferring context: 10.90kB 0.0s done
+#30 DONE 0.5s
+
+#31 [turboquant-service internal] load build context
+#31 transferring context: 70.88kB 0.0s done
+#31 DONE 0.5s
+
+#32 [speaker-service internal] load build context
+#32 transferring context: 28.65kB 0.0s done
+#32 DONE 0.5s
+
+#33 [whisper-service internal] load build context
+#33 transferring context: 18.53kB 0.0s done
+#33 DONE 0.6s
+
+#24 [face-service internal] load build context
+#24 transferring context: 9.79kB 0.0s done
+#24 DONE 0.6s
+
+#34 [ai-backend internal] load build context
+#34 transferring context: 541.67kB 0.1s done
+#34 DONE 0.5s
+
+#29 [face-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 sha256:6af33b7c3442a8d051fdda2b092f5a2b4e9fdfe57ec3886097ffd077a5108775 0B / 98B 0.2s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 0B / 22.77MB 0.2s
+#29 ...
+
+#35 [web base 1/1] FROM docker.io/oven/bun:alpine@sha256:5acc90a93e91ff07bf72aa90a7c9f0fa189765aec90b47bdbf2152d2196383c0
+#35 resolve docker.io/oven/bun:alpine@sha256:5acc90a93e91ff07bf72aa90a7c9f0fa189765aec90b47bdbf2152d2196383c0 0.1s done
+#35 DONE 1.2s
+
+#29 [face-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 sha256:6af33b7c3442a8d051fdda2b092f5a2b4e9fdfe57ec3886097ffd077a5108775 98B / 98B 0.5s
+#29 sha256:6af33b7c3442a8d051fdda2b092f5a2b4e9fdfe57ec3886097ffd077a5108775 98B / 98B 0.5s done
+#29 ...
+
+#16 [web internal] load build context
+#16 transferring context: 39.44MB 2.4s done
+#16 DONE 2.7s
+
+#29 [face-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 2.10MB / 22.77MB 3.5s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 4.19MB / 22.77MB 7.2s
+#29 ...
+
+#36 [web runner 1/7] FROM docker.io/library/node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293
+#36 resolve docker.io/library/node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 0.1s done
+#36 sha256:fff4e2c1b189bf87d63ad8bd07f7f4eb288d6f2b6a07a8bb44c60e8c075d2096 445B / 445B 0.4s done
+#36 sha256:b2cbbfe903b0821005780971ddc5892edcc4ce74c5a48d82e1d2b382edac3122 1.26MB / 1.26MB 0.7s done
+#36 sha256:4feea04c154301db6f4a496efa397b3db96603b1c009c797cfdde77bea8b3287 27.26MB / 43.23MB 8.9s
+#36 sha256:6a0ac1617861a677b045b7ff88545213ec31c0ff08763195a70a4a5adda577bb 3.86MB / 3.86MB 4.5s done
+#36 extracting sha256:6a0ac1617861a677b045b7ff88545213ec31c0ff08763195a70a4a5adda577bb 0.2s done
+#36 ...
+
+#29 [face-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 ...
+
+#27 [whisper-service stage-0 1/8] FROM docker.io/library/python:3.11-slim@sha256:cdbd05fb6f457ca275ff51ce00d93d865ca0b6a25f5ffb08262d94f6835771e5
+#27 sha256:ef10b7552742365868f59e04ba212fa52040be3793f575a364223779eccaf9ab 250B / 250B 0.3s done
+#27 sha256:2bd1111909f3359c1e4322cc6406924173d88d730ca8c078830e9af10d75a12f 3.15MB / 14.36MB 9.3s
+#27 sha256:d31bca4e70704f7ea90d346d4041a25dcd35888777af794f232f85376bff4154 1.29MB / 1.29MB 5.8s done
+#27 extracting sha256:d31bca4e70704f7ea90d346d4041a25dcd35888777af794f232f85376bff4154 0.2s done
+#27 ...
+
+#35 [web base 1/1] FROM docker.io/oven/bun:alpine@sha256:5acc90a93e91ff07bf72aa90a7c9f0fa189765aec90b47bdbf2152d2196383c0
+#35 sha256:cce26e891611b83efb72188a1b88da1afb85f293a070b53c6259b1dbfc922cf3 140B / 140B 0.2s done
+#35 sha256:0d0b2b34a3453dedf85b39d8c100eadf6838fc467d9acafbf3ab31459ed51af6 185B / 185B 0.2s done
+#35 sha256:2f325d21eb3a45d41dab236a207a03a064598cf43a96271ce5306191add522f9 297B / 297B 0.2s done
+#35 sha256:cf34dbd5e0ab03f713e02ef49ab5525718e0381241fe29bae7897cd0be7081f7 0B / 3.66MB 5.0s
+#35 sha256:dcf061af8c01e1f1f25f674a31deb3a3b06fba9cee22f1915d5c8696773185c8 4.19MB / 35.39MB 3.6s
+#35 ...
+
+#27 [whisper-service stage-0 1/8] FROM docker.io/library/python:3.11-slim@sha256:cdbd05fb6f457ca275ff51ce00d93d865ca0b6a25f5ffb08262d94f6835771e5
+#27 sha256:2bd1111909f3359c1e4322cc6406924173d88d730ca8c078830e9af10d75a12f 4.19MB / 14.36MB 12.9s
+#27 ...
+
+#36 [web runner 1/7] FROM docker.io/library/node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293
+#36 sha256:4feea04c154301db6f4a496efa397b3db96603b1c009c797cfdde77bea8b3287 43.23MB / 43.23MB 16.4s done
+#36 extracting sha256:4feea04c154301db6f4a496efa397b3db96603b1c009c797cfdde77bea8b3287 1.7s done
+#36 extracting sha256:b2cbbfe903b0821005780971ddc5892edcc4ce74c5a48d82e1d2b382edac3122 0.1s done
+#36 DONE 19.2s
+
+#27 [whisper-service stage-0 1/8] FROM docker.io/library/python:3.11-slim@sha256:cdbd05fb6f457ca275ff51ce00d93d865ca0b6a25f5ffb08262d94f6835771e5
+#27 ...
+
+#29 [face-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 5.24MB / 22.77MB 18.3s
+#29 ...
+
+#36 [web runner 1/7] FROM docker.io/library/node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293
+#36 extracting sha256:fff4e2c1b189bf87d63ad8bd07f7f4eb288d6f2b6a07a8bb44c60e8c075d2096 0.0s done
+#36 DONE 19.2s
+
+#29 [face-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 ...
+
+#27 [whisper-service stage-0 1/8] FROM docker.io/library/python:3.11-slim@sha256:cdbd05fb6f457ca275ff51ce00d93d865ca0b6a25f5ffb08262d94f6835771e5
+#27 ...
+
+#37 [web runner 2/7] WORKDIR /app
+#37 DONE 0.2s
+
+#27 [whisper-service stage-0 1/8] FROM docker.io/library/python:3.11-slim@sha256:cdbd05fb6f457ca275ff51ce00d93d865ca0b6a25f5ffb08262d94f6835771e5
+#27 ...
+
+#38 [web runner 3/7] RUN addgroup --system --gid 1001 nodejs
+#38 DONE 0.3s
+
+#27 [whisper-service stage-0 1/8] FROM docker.io/library/python:3.11-slim@sha256:cdbd05fb6f457ca275ff51ce00d93d865ca0b6a25f5ffb08262d94f6835771e5
+#27 sha256:2bd1111909f3359c1e4322cc6406924173d88d730ca8c078830e9af10d75a12f 4.19MB / 14.36MB 18.0s
+#27 ...
+
+#39 [web runner 4/7] RUN adduser --system --uid 1001 nextjs
+#39 DONE 0.3s
+
+#27 [whisper-service stage-0 1/8] FROM docker.io/library/python:3.11-slim@sha256:cdbd05fb6f457ca275ff51ce00d93d865ca0b6a25f5ffb08262d94f6835771e5
+#27 sha256:2bd1111909f3359c1e4322cc6406924173d88d730ca8c078830e9af10d75a12f 5.24MB / 14.36MB 19.4s
+#27 ...
+
+#35 [web base 1/1] FROM docker.io/oven/bun:alpine@sha256:5acc90a93e91ff07bf72aa90a7c9f0fa189765aec90b47bdbf2152d2196383c0
+#35 sha256:cf34dbd5e0ab03f713e02ef49ab5525718e0381241fe29bae7897cd0be7081f7 0B / 3.66MB 15.2s
+#35 sha256:dcf061af8c01e1f1f25f674a31deb3a3b06fba9cee22f1915d5c8696773185c8 14.68MB / 35.39MB 13.8s
+#35 sha256:84f5eff04246b56d48d1ed6cbd82d6bc7e53f7e790db6a467f92571c69f3289e 1.05MB / 3.81MB 3.9s
+#35 ...
+
+#27 [whisper-service stage-0 1/8] FROM docker.io/library/python:3.11-slim@sha256:cdbd05fb6f457ca275ff51ce00d93d865ca0b6a25f5ffb08262d94f6835771e5
+#27 sha256:2bd1111909f3359c1e4322cc6406924173d88d730ca8c078830e9af10d75a12f 6.29MB / 14.36MB 20.3s
+#27 sha256:2bd1111909f3359c1e4322cc6406924173d88d730ca8c078830e9af10d75a12f 7.34MB / 14.36MB 21.3s
+#27 sha256:2bd1111909f3359c1e4322cc6406924173d88d730ca8c078830e9af10d75a12f 8.39MB / 14.36MB 22.2s
+#27 sha256:2bd1111909f3359c1e4322cc6406924173d88d730ca8c078830e9af10d75a12f 9.44MB / 14.36MB 22.5s
+#27 sha256:2bd1111909f3359c1e4322cc6406924173d88d730ca8c078830e9af10d75a12f 10.49MB / 14.36MB 23.6s
+#27 sha256:2bd1111909f3359c1e4322cc6406924173d88d730ca8c078830e9af10d75a12f 11.53MB / 14.36MB 24.0s
+#27 sha256:2bd1111909f3359c1e4322cc6406924173d88d730ca8c078830e9af10d75a12f 12.58MB / 14.36MB 24.3s
+#27 sha256:2bd1111909f3359c1e4322cc6406924173d88d730ca8c078830e9af10d75a12f 13.63MB / 14.36MB 24.6s
+#27 sha256:2bd1111909f3359c1e4322cc6406924173d88d730ca8c078830e9af10d75a12f 14.36MB / 14.36MB 25.8s done
+#27 extracting sha256:2bd1111909f3359c1e4322cc6406924173d88d730ca8c078830e9af10d75a12f
+#27 extracting sha256:2bd1111909f3359c1e4322cc6406924173d88d730ca8c078830e9af10d75a12f 1.2s done
+#27 extracting sha256:ef10b7552742365868f59e04ba212fa52040be3793f575a364223779eccaf9ab 0.0s done
+#27 DONE 28.5s
+
+#29 [face-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 12.58MB / 22.77MB 27.9s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 14.68MB / 22.77MB 29.6s
+#29 ...
+
+#35 [web base 1/1] FROM docker.io/oven/bun:alpine@sha256:5acc90a93e91ff07bf72aa90a7c9f0fa189765aec90b47bdbf2152d2196383c0
+#35 sha256:cf34dbd5e0ab03f713e02ef49ab5525718e0381241fe29bae7897cd0be7081f7 3.66MB / 3.66MB 21.8s done
+#35 sha256:dcf061af8c01e1f1f25f674a31deb3a3b06fba9cee22f1915d5c8696773185c8 35.39MB / 35.39MB 22.4s done
+#35 sha256:84f5eff04246b56d48d1ed6cbd82d6bc7e53f7e790db6a467f92571c69f3289e 3.81MB / 3.81MB 6.2s done
+#35 extracting sha256:84f5eff04246b56d48d1ed6cbd82d6bc7e53f7e790db6a467f92571c69f3289e 0.2s done
+#35 extracting sha256:dcf061af8c01e1f1f25f674a31deb3a3b06fba9cee22f1915d5c8696773185c8 0.8s done
+#35 DONE 30.7s
+
+#29 [face-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 ...
+
+#35 [web base 1/1] FROM docker.io/oven/bun:alpine@sha256:5acc90a93e91ff07bf72aa90a7c9f0fa189765aec90b47bdbf2152d2196383c0
+#35 extracting sha256:2f325d21eb3a45d41dab236a207a03a064598cf43a96271ce5306191add522f9 0.0s done
+#35 extracting sha256:0d0b2b34a3453dedf85b39d8c100eadf6838fc467d9acafbf3ab31459ed51af6 0.0s done
+#35 extracting sha256:cf34dbd5e0ab03f713e02ef49ab5525718e0381241fe29bae7897cd0be7081f7 0.1s done
+#35 extracting sha256:cce26e891611b83efb72188a1b88da1afb85f293a070b53c6259b1dbfc922cf3 0.0s done
+#35 DONE 30.8s
+
+#29 [face-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 ...
+
+#40 [web builder  1/13] WORKDIR /app
+#40 DONE 0.2s
+
+#29 [face-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 ...
+
+#41 [web builder  2/13] COPY package.json package.json
+#41 DONE 0.0s
+
+#42 [web builder  3/13] COPY bun.lock bun.lock
+#42 DONE 0.0s
+
+#43 [web builder  4/13] COPY turbo.json turbo.json
+#43 DONE 0.0s
+
+#29 [face-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 ...
+
+#44 [web builder  5/13] COPY apps/web/package.json apps/web/package.json
+#44 DONE 0.1s
+
+#45 [web builder  6/13] COPY packages/env/package.json packages/env/package.json
+#45 DONE 0.1s
+
+#29 [face-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 ...
+
+#46 [web builder  7/13] COPY packages/ui/package.json packages/ui/package.json
+#46 DONE 0.0s
+
+#29 [face-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 16.78MB / 22.77MB 31.2s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 16.78MB / 22.77MB 36.3s
+#29 ...
+
+#47 [web builder  8/13] RUN --mount=type=cache,target=/root/.bun/install/cache     bun install --ignore-scripts &&     cd /app &&     sed -i '/@napi-rs\/canvas/d' apps/web/package.json &&     bun install
+#47 0.318 bun install v1.3.14 (0d9b296a)
+#47 0.332 Resolving dependencies
+#47 ...
+
+#29 [face-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 16.78MB / 22.77MB 41.4s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 16.78MB / 22.77MB 46.5s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 16.78MB / 22.77MB 51.6s
+#29 ...
+
+#47 [web builder  8/13] RUN --mount=type=cache,target=/root/.bun/install/cache     bun install --ignore-scripts &&     cd /app &&     sed -i '/@napi-rs\/canvas/d' apps/web/package.json &&     bun install
+#47 12.30 Resolved, downloaded and extracted [180]
+#47 ...
+
+#29 [face-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 16.78MB / 22.77MB 56.7s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 16.78MB / 22.77MB 61.8s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 16.78MB / 22.77MB 66.9s
+#29 ...
+
+#47 [web builder  8/13] RUN --mount=type=cache,target=/root/.bun/install/cache     bun install --ignore-scripts &&     cd /app &&     sed -i '/@napi-rs\/canvas/d' apps/web/package.json &&     bun install
+#47 29.03 error: Fail extracting tarball for "@img/sharp-libvips-linux-x64"
+#47 ...
+
+#29 [face-service] FROM ghcr.io/astral-sh/uv:0.9.28@sha256:59240a65d6b57e6c507429b45f01b8f2c7c0bbeee0fb697c41a39c6a8e3a4cfb
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 17.83MB / 22.77MB 72.0s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 17.83MB / 22.77MB 77.1s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 17.83MB / 22.77MB 82.2s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 17.83MB / 22.77MB 87.3s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 17.83MB / 22.77MB 92.4s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 17.83MB / 22.77MB 97.5s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 17.83MB / 22.77MB 102.6s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 17.83MB / 22.77MB 107.7s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 17.83MB / 22.77MB 112.8s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 17.83MB / 22.77MB 117.9s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 17.83MB / 22.77MB 123.0s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 18.87MB / 22.77MB 128.1s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 20.97MB / 22.77MB 130.3s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 22.77MB / 22.77MB 131.4s
+#29 sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 22.77MB / 22.77MB 131.6s done
+#29 extracting sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc
+#29 extracting sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 0.7s done
+#29 extracting sha256:6af33b7c3442a8d051fdda2b092f5a2b4e9fdfe57ec3886097ffd077a5108775
+#29 extracting sha256:91616e26aa3d986b1943631be64349c41b171daddfbc8f7c9d3662d225afb6cc 0.7s done
+#29 extracting sha256:6af33b7c3442a8d051fdda2b092f5a2b4e9fdfe57ec3886097ffd077a5108775 0.0s done
+#29 DONE 133.0s
+
+#47 [web builder  8/13] RUN --mount=type=cache,target=/root/.bun/install/cache     bun install --ignore-scripts &&     cd /app &&     sed -i '/@napi-rs\/canvas/d' apps/web/package.json &&     bun install
+#47 100.7 error: Fail extracting tarball from @img/sharp-libvips-linux-x64
+#47 ERROR: process "/bin/sh -c bun install --ignore-scripts &&     cd /app &&     sed -i '/@napi-rs\\/canvas/d' apps/web/package.json &&     bun install" did not complete successfully: exit code: 1
+------
+ > [web builder  8/13] RUN --mount=type=cache,target=/root/.bun/install/cache     bun install --ignore-scripts &&     cd /app &&     sed -i '/@napi-rs\/canvas/d' apps/web/package.json &&     bun install:
+0.318 bun install v1.3.14 (0d9b296a)
+0.332 Resolving dependencies
+12.30 Resolved, downloaded and extracted [180]
+29.03 error: Fail extracting tarball for "@img/sharp-libvips-linux-x64"
+100.7 error: Fail extracting tarball from @img/sharp-libvips-linux-x64
+------
+Dockerfile:29
+
+--------------------
+
+  28 |     
+
+  29 | >>> RUN --mount=type=cache,target=/root/.bun/install/cache \
+
+  30 | >>>     bun install --ignore-scripts && \
+
+  31 | >>>     cd /app && \
+
+  32 | >>>     sed -i '/@napi-rs\/canvas/d' apps/web/package.json && \
+
+  33 | >>>     bun install
+
+  34 |     
+
+--------------------
+
+target web: failed to solve: process "/bin/sh -c bun install --ignore-scripts &&     cd /app &&     sed -i '/@napi-rs\\/canvas/d' apps/web/package.json &&     bun install" did not complete successfully: exit code: 1
+
+
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/pa7otkvjnahe7rmili0yn248w
+
