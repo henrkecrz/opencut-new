@@ -1,8 +1,12 @@
 # `packages/ai-client`
 
-Pacote planejado para centralizar o cliente HTTP usado pelo OpenCut para conversar com o backend FastAPI do OpenCut-AI.
+Cliente HTTP compartilhado para o OpenCut conversar com o backend FastAPI do OpenCut-AI.
 
-## Origem inicial
+Este pacote é **framework-neutral**: não depende de React, Next.js, Zustand ou aliases `@/`.
+
+## Origem
+
+Foi extraído/adaptado a partir de:
 
 ```txt
 OpenCut-AI/apps/web/src/lib/ai-client.ts
@@ -10,49 +14,72 @@ OpenCut-AI/apps/web/src/lib/ai-client.ts
 
 ## Responsabilidade
 
-Este pacote deve expor um cliente para:
+O pacote expõe uma API simples para os primeiros fluxos de integração:
 
-- `GET /health`;
-- `GET /services/health`;
-- `POST /api/transcribe`;
-- `POST /api/llm/command`;
-- chamadas futuras de TTS, geração de imagem, análise, exportação e vídeo.
+- `health()` → `GET /health`
+- `servicesHealth()` → `GET /services/health`
+- `transcribe(file, language?)` → `POST /api/transcribe`
+- `command(request)` → `POST /api/llm/command`
 
-## Adaptação obrigatória
+## Uso básico
 
-O client original usa variável de ambiente do Next.js:
+```ts
+import { createAIClient } from "@opencut-studio/ai-client";
 
-```txt
-NEXT_PUBLIC_AI_BACKEND_URL
+const aiClient = createAIClient({
+  baseUrl: "http://localhost:8420",
+});
+
+const status = await aiClient.health();
 ```
 
-Para o OpenCut em Vite, o client compartilhado deve aceitar:
+## Uso no OpenCut/Vite
+
+O client tenta ler automaticamente:
 
 ```txt
 VITE_AI_BACKEND_URL
 ```
 
-ou receber a `baseUrl` por configuração:
+Exemplo:
+
+```env
+VITE_AI_BACKEND_URL=http://localhost:8420
+```
+
+Também é possível configurar manualmente:
 
 ```ts
-createAIClient({ baseUrl: import.meta.env.VITE_AI_BACKEND_URL })
+const aiClient = createAIClient({
+  baseUrl: import.meta.env.VITE_AI_BACKEND_URL,
+});
+```
+
+## Comando de IA
+
+```ts
+const result = await aiClient.command({
+  command: "Corte o silêncio inicial e adicione uma legenda",
+  timeline_state: {},
+});
+```
+
+A resposta deve ser usada para preview antes de alterar a timeline.
+
+## Transcrição
+
+```ts
+const result = await aiClient.transcribe(file, "pt");
 ```
 
 ## Regras
 
-- Não depender de React.
-- Não depender de Next.js.
-- Não depender de Zustand.
-- Não usar aliases `@/`.
-- Consumir tipos de `packages/ai-types`.
-- Permitir uso em browser e testes.
+- O editor deve falar apenas com o `ai-backend`.
+- O editor não deve chamar microserviços diretamente.
+- A IA não deve aplicar ações automaticamente.
+- Ações vindas da IA devem passar pelo `ai-editor-adapter`.
+- Tipos compartilhados devem vir de `@opencut-studio/ai-types`.
 
 ## Próxima etapa
 
-Extrair e adaptar o client atual para uma API neutra:
-
-```ts
-const aiClient = createAIClient({
-  baseUrl: "http://localhost:8420",
-});
-```
+Integrar `aiClient.health()` no OpenCut para mostrar o primeiro indicador visual de backend conectado/desconectado.
