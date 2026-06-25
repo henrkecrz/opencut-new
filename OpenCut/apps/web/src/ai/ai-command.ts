@@ -1,45 +1,15 @@
-import { getAIBackendUrl } from './ai-status'
+import { createAIClient } from '@opencut-studio/ai-client'
+import type { CommandResult, EditorAction } from '@opencut-studio/ai-types'
 
-export interface EditorAction {
-  type: string
-  target?: string | null
-  params: Record<string, unknown>
-  description?: string
-}
+export type { CommandResult, EditorAction } from '@opencut-studio/ai-types'
 
-export interface CommandResult {
-  actions: EditorAction[]
-  explanation: string
-  confidence?: number
-}
+const aiClient = createAIClient()
 
 export async function requestAICommand(command: string): Promise<CommandResult> {
-  const response = await fetch(`${getAIBackendUrl()}/api/llm/command`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      command,
-      timeline_state: {},
-    }),
+  return aiClient.command({
+    command,
+    timeline_state: {},
   })
-
-  if (!response.ok) {
-    const errorText = await response.text().catch(() => 'Unknown error')
-    throw new Error(`HTTP ${response.status}: ${errorText}`)
-  }
-
-  const data = (await response.json()) as Partial<CommandResult>
-
-  return {
-    actions: Array.isArray(data.actions) ? data.actions : [],
-    explanation:
-      typeof data.explanation === 'string'
-        ? data.explanation
-        : 'A IA retornou ações para revisão.',
-    confidence: typeof data.confidence === 'number' ? data.confidence : undefined,
-  }
 }
 
 export function formatConfidence(confidence?: number) {
