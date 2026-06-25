@@ -1,4 +1,5 @@
-import { type FormEvent, useState } from 'react'
+import { type FormEvent, useMemo, useState } from 'react'
+import { createActionPreviews } from '#/ai/ai-action-adapter'
 import {
   type CommandResult,
   formatActionParams,
@@ -17,6 +18,11 @@ export function AICommandPanel() {
   const [result, setResult] = useState<CommandResult | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+
+  const actionPreviews = useMemo(
+    () => (result ? createActionPreviews(result.actions) : []),
+    [result],
+  )
 
   const canSubmit = command.trim().length > 0 && !isLoading
 
@@ -94,7 +100,7 @@ export function AICommandPanel() {
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-muted-foreground">
-            As ações retornadas são apenas um preview até existir o adaptador da timeline.
+            O adaptador valida as ações, mas ainda não altera a timeline.
           </p>
           <button
             className="rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:cursor-not-allowed disabled:opacity-50"
@@ -132,23 +138,35 @@ export function AICommandPanel() {
           </p>
 
           <div className="mt-4 grid gap-3">
-            {result.actions.length > 0 ? (
-              result.actions.map((action, index) => (
+            {actionPreviews.length > 0 ? (
+              actionPreviews.map((preview, index) => (
                 <article
                   className="rounded-xl border border-border bg-card p-3"
-                  key={`${action.type}-${index}`}
+                  key={preview.id}
                 >
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                    <h4 className="text-sm font-semibold">
-                      {index + 1}. {action.type}
-                    </h4>
-                    <span className="w-fit rounded-full bg-secondary px-2.5 py-1 text-xs text-secondary-foreground">
-                      {action.target ?? 'sem alvo'}
-                    </span>
+                    <div>
+                      <h4 className="text-sm font-semibold">
+                        {index + 1}. {preview.title}
+                      </h4>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {preview.description}
+                      </p>
+                    </div>
+                    <StatusBadge status={preview.status} />
                   </div>
-                  <p className="mt-2 text-xs leading-5 text-muted-foreground">
-                    {formatActionParams(action.params)}
+
+                  <p className="mt-3 text-xs leading-5 text-muted-foreground">
+                    {formatActionParams(preview.action.params)}
                   </p>
+
+                  {preview.warnings.length > 0 ? (
+                    <ul className="mt-3 grid gap-1 text-xs text-muted-foreground">
+                      {preview.warnings.map((warning) => (
+                        <li key={warning}>⚠️ {warning}</li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </article>
               ))
             ) : (
@@ -160,5 +178,20 @@ export function AICommandPanel() {
         </div>
       ) : null}
     </section>
+  )
+}
+
+function StatusBadge({ status }: { status: 'ready' | 'needs_review' | 'unsupported' }) {
+  const label =
+    status === 'ready'
+      ? 'pronta'
+      : status === 'needs_review'
+        ? 'revisar'
+        : 'não suportada'
+
+  return (
+    <span className="w-fit rounded-full bg-secondary px-2.5 py-1 text-xs text-secondary-foreground">
+      {label}
+    </span>
   )
 }
