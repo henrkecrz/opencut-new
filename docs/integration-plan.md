@@ -148,7 +148,20 @@ Observação: enquanto o workspace da raiz não estiver ativo, o status usa um c
 
 ## Fase 5 — Integrar transcrição
 
-Próxima etapa.
+Status: concluído em primeira versão local.
+
+Criado no editor principal:
+
+```txt
+OpenCut/apps/web/src/ai/ai-transcription.ts
+OpenCut/apps/web/src/components/ai/ai-transcription-panel.tsx
+```
+
+A rota inicial foi atualizada:
+
+```txt
+OpenCut/apps/web/src/routes/index.tsx
+```
 
 Endpoint usado:
 
@@ -156,25 +169,30 @@ Endpoint usado:
 POST /api/transcribe
 ```
 
-Fluxo:
+Fluxo implementado:
 
 ```txt
 arquivo de áudio/vídeo
 ↓
-aiClient.transcribe(file)
+transcribeAIFile(file, language?)
 ↓
 TranscriptionResult
 ↓
-legendas/segmentos no editor
+preview dos segmentos no editor
 ```
 
 Critério de sucesso:
 
 - usuário envia mídia;
 - backend retorna segmentos;
-- editor consegue exibir ou preparar legendas.
+- editor exibe os primeiros segmentos com timestamps;
+- nenhuma alteração é aplicada automaticamente na timeline.
+
+Observação: enquanto o workspace da raiz não estiver ativo, a transcrição usa um client local mínimo. Depois, ela deve ser substituída por `@opencut-studio/ai-client`.
 
 ## Fase 6 — Integrar comandos de IA
+
+Próxima etapa.
 
 Endpoint usado:
 
