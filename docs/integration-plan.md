@@ -25,7 +25,7 @@ Concluído:
 
 ## Fase 1 — Documentação e base comum
 
-Criar e manter:
+Concluído:
 
 ```txt
 docs/architecture.md
@@ -34,11 +34,14 @@ docs/api-contract.md
 packages/ai-client/
 packages/ai-types/
 packages/ai-store/
+packages/ai-editor-adapter/
 ```
 
 Objetivo: preparar a extração dos módulos de IA sem quebrar os projetos originais.
 
 ## Fase 2 — Extrair tipos de IA
+
+Status: concluído em primeira versão.
 
 Origem:
 
@@ -46,10 +49,10 @@ Origem:
 OpenCut-AI/apps/web/src/types/ai.ts
 ```
 
-Destino inicial:
+Destino:
 
 ```txt
-packages/ai-types/
+packages/ai-types/src/index.ts
 ```
 
 Responsabilidades:
@@ -72,19 +75,21 @@ Critério de sucesso:
 
 ## Fase 3 — Extrair AI Client
 
+Status: concluído em primeira versão.
+
 Origem:
 
 ```txt
 OpenCut-AI/apps/web/src/lib/ai-client.ts
 ```
 
-Destino inicial:
+Destino:
 
 ```txt
-packages/ai-client/
+packages/ai-client/src/index.ts
 ```
 
-Mudanças obrigatórias:
+Mudança principal:
 
 ```txt
 process.env.NEXT_PUBLIC_AI_BACKEND_URL
@@ -92,23 +97,30 @@ process.env.NEXT_PUBLIC_AI_BACKEND_URL
 import.meta.env.VITE_AI_BACKEND_URL
 ```
 
-Também será necessário remover dependências diretas de aliases Next/Vite específicos e consumir os tipos de `packages/ai-types`.
+O pacote `ai-client` expõe:
 
-Critério de sucesso:
+- `health()`;
+- `servicesHealth()`;
+- `transcribe(file, language?)`;
+- `command(request)`.
 
-- `aiClient.health()` funciona no OpenCut;
-- `aiClient.transcribe(file)` funciona no OpenCut;
-- `aiClient.command(...)` funciona no OpenCut.
+Observação: a raiz ainda precisa de `package.json` com workspace `packages/*` para o editor consumir esse pacote diretamente.
 
 ## Fase 4 — Integrar status da IA ao OpenCut
 
-Criar no editor principal:
+Status: concluído em primeira versão local.
+
+Criado no editor principal:
 
 ```txt
-OpenCut/apps/web/src/ai/
-├── ai-provider.tsx
-├── use-ai-status.ts
-└── ai-status-indicator.tsx
+OpenCut/apps/web/src/ai/ai-status.ts
+OpenCut/apps/web/src/components/ai/ai-status-indicator.tsx
+```
+
+A rota inicial foi atualizada:
+
+```txt
+OpenCut/apps/web/src/routes/index.tsx
 ```
 
 Primeira integração visual:
@@ -116,7 +128,7 @@ Primeira integração visual:
 ```txt
 IA conectada
 IA desconectada
-Backend iniciando
+Verificando IA
 Erro de conexão
 ```
 
@@ -132,7 +144,11 @@ Critério de sucesso:
 - erro de conexão é claro;
 - não existe dependência do frontend Next.js do OpenCut-AI.
 
+Observação: enquanto o workspace da raiz não estiver ativo, o status usa um client local mínimo. Depois, ele deve ser substituído por `@opencut-studio/ai-client`.
+
 ## Fase 5 — Integrar transcrição
+
+Próxima etapa.
 
 Endpoint usado:
 
