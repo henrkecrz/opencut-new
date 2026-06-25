@@ -1,8 +1,12 @@
 # `packages/ai-types`
 
-Pacote planejado para centralizar os tipos TypeScript usados na integração entre o editor OpenCut e o backend de IA.
+Contratos TypeScript compartilhados entre o editor OpenCut e a camada de IA.
 
-## Origem inicial
+Este pacote é framework-neutral: não depende de React, Next.js, Vite, Zustand ou aliases `@/`.
+
+## Origem
+
+Adaptado a partir de:
 
 ```txt
 OpenCut-AI/apps/web/src/types/ai.ts
@@ -10,12 +14,12 @@ OpenCut-AI/apps/web/src/types/ai.ts
 
 ## Responsabilidade
 
-Este pacote deve conter contratos compartilhados para:
+Centralizar contratos para:
 
-- status do backend;
-- erros de IA;
+- status da IA;
+- erros;
 - transcrição;
-- comandos de IA;
+- comandos;
 - ações do editor;
 - TTS;
 - geração de imagem;
@@ -23,7 +27,34 @@ Este pacote deve conter contratos compartilhados para:
 - análise de áudio;
 - detecção facial;
 - diarização;
-- sugestões e automações.
+- sugestões e automações;
+- TurboQuant e modelos.
+
+## Principais exports
+
+```txt
+AIBackendStatus
+AIErrorType
+ServicesHealth
+TranscriptionResult
+CommandRequest
+CommandResult
+EditorAction
+EditorActionType
+TTSRequest
+TTSResult
+ImageGenParams
+ImageGenResult
+VideoGenRequest
+VideoGenResult
+TurboQuantStatus
+```
+
+## Uso
+
+```ts
+import type { AIBackendStatus, CommandResult } from "@opencut-studio/ai-types";
+```
 
 ## Regras
 
@@ -31,14 +62,8 @@ Este pacote deve conter contratos compartilhados para:
 - Não depender de Vite.
 - Não usar aliases como `@/`.
 - Exportar apenas tipos, interfaces e enums.
-- Servir tanto ao frontend quanto a testes de contrato.
+- Ser a fonte única de contratos para `ai-client`, `ai-store` e `ai-editor-adapter`.
 
 ## Próxima etapa
 
-Extrair gradualmente o conteúdo de:
-
-```txt
-OpenCut-AI/apps/web/src/types/ai.ts
-```
-
-para este pacote.
+Validar os tipos contra as respostas reais dos endpoints da API.
