@@ -1,6 +1,8 @@
 # `packages/ai-editor-adapter`
 
-Pacote planejado para traduzir ações geradas pela IA em ações reais da timeline do OpenCut.
+Pacote responsável por transformar ações geradas pela IA em previews seguros para o editor OpenCut.
+
+No estágio atual, ele **não aplica ações na timeline**. Ele valida, classifica e descreve o que a IA sugeriu.
 
 ## Problema
 
@@ -15,22 +17,81 @@ adjust_speed
 mute
 ```
 
-Mas o editor OpenCut terá sua própria API interna de comandos, timeline, tracks e elementos.
+Mas o OpenCut terá sua própria API interna de timeline, tracks, clips, overlays e comandos.
 
 Este pacote será a ponte entre os dois mundos.
 
-## Responsabilidade
+## Responsabilidade atual
 
 ```txt
 AI action
 ↓
+normalização
+↓
 validação
 ↓
-preview
+preview seguro
 ↓
-confirmação do usuário
+status: pronta | revisar | não suportada
+```
+
+## Responsabilidade futura
+
+```txt
+preview aprovado pelo usuário
+↓
+AI editor adapter
 ↓
 OpenCut editor command
+↓
+timeline alterada com segurança
+```
+
+## API inicial
+
+```ts
+import { createActionPreviews } from "@opencut-studio/ai-editor-adapter";
+
+const result = createActionPreviews(actions);
+```
+
+Retorno:
+
+```ts
+{
+  previews: ActionPreview[];
+  summary: {
+    total: number;
+    ready: number;
+    needsReview: number;
+    unsupported: number;
+  };
+}
+```
+
+## Status possíveis
+
+```txt
+ready         ação suportada e com parâmetros mínimos
+needs_review  ação suportada, mas com parâmetros ausentes ou incompletos
+unsupported   ação ainda sem tradução para o OpenCut
+```
+
+## Ações reconhecidas nesta versão
+
+```txt
+add_text
+ADD_TEXT_OVERLAY
+cut
+split
+SPLIT_CLIP
+trim
+TRIM_CLIP
+mute
+adjust_speed
+add_transition
+fade_in
+fade_out
 ```
 
 ## Regras
@@ -41,27 +102,6 @@ OpenCut editor command
 - O usuário confirma antes de alterar a timeline.
 - O adaptador deve ser testável isoladamente.
 
-## Exemplo futuro
-
-```ts
-const preview = adapter.preview(aiActions, editorState);
-
-if (userConfirmed) {
-  adapter.apply(aiActions, editor);
-}
-```
-
-## Ações iniciais suportadas
-
-Primeira versão deve focar em:
-
-- `add_text`;
-- `cut`;
-- `trim`;
-- `split`;
-- `mute`;
-- `adjust_speed`.
-
 ## Próxima etapa
 
-Mapear a API real da timeline do OpenCut e criar uma tabela de equivalência entre `EditorAction` e comandos internos do editor.
+Mapear a API real da timeline do OpenCut e substituir o modo preview por comandos reais controlados, com confirmação explícita do usuário.
