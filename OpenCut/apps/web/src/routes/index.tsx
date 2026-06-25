@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { AIStatusIndicator } from '#/components/ai/ai-status-indicator'
+import { AICommandPanel } from '#/components/ai/ai-command-panel'
 import { AITranscriptionPanel } from '#/components/ai/ai-transcription-panel'
 
 export const Route = createFileRoute('/')({ component: Home })
@@ -19,7 +20,8 @@ function Home() {
               </h1>
               <p className="mt-4 max-w-2xl text-base text-muted-foreground">
                 Esta tela valida os primeiros fluxos entre o OpenCut e o backend
-                FastAPI do OpenCut-AI: status do serviço e transcrição automática.
+                FastAPI do OpenCut-AI: status do serviço, transcrição automática
+                e comandos revisáveis para timeline.
               </p>
             </div>
             <AIStatusIndicator compact />
@@ -29,6 +31,8 @@ function Home() {
         <AIStatusIndicator />
 
         <AITranscriptionPanel />
+
+        <AICommandPanel />
 
         <section className="grid gap-4 md:grid-cols-3">
           <IntegrationCard
@@ -44,6 +48,7 @@ function Home() {
           <IntegrationCard
             title="3. Comandos"
             description="Converter linguagem natural em ações revisáveis da timeline."
+            done
           />
         </section>
       </div>
