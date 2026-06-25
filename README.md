@@ -65,6 +65,7 @@ Esses módulos serão gradualmente levados para pacotes compartilhados e integra
 ```txt
 opencut-new/
 ├── README.md
+├── pnpm-workspace.yaml
 ├── OpenCut/
 ├── OpenCut-AI/
 ├── docs/
@@ -77,6 +78,22 @@ opencut-new/
     ├── ai-store/
     └── ai-editor-adapter/
 ```
+
+## Workspace
+
+O workspace foi ativado por `pnpm-workspace.yaml`:
+
+```yaml
+packages:
+  - "packages/*"
+  - "OpenCut/apps/*"
+```
+
+O app `OpenCut/apps/web` já declara dependência nos pacotes compartilhados:
+
+- `@opencut-studio/ai-client`
+- `@opencut-studio/ai-types`
+- `@opencut-studio/ai-editor-adapter`
 
 ## Pacotes compartilhados
 
@@ -110,7 +127,15 @@ Pacote reservado para o estado de IA do editor.
 
 ### `packages/ai-editor-adapter`
 
-Pacote reservado para traduzir ações da IA em ações reais da timeline.
+Pacote de preview e validação para ações retornadas pela IA.
+
+Ele classifica ações como:
+
+- `ready`
+- `needs_review`
+- `unsupported`
+
+O adaptador ainda não aplica ações na timeline. Ele prepara a ponte segura para a futura API real do editor.
 
 ## Fluxo esperado
 
@@ -134,23 +159,32 @@ Microserviços
   └── Ollama
 ```
 
+## Fluxos já integrados no OpenCut
+
+- Status do backend via `aiClient.health()`.
+- Transcrição via `aiClient.transcribe(file, language?)`.
+- Comandos de IA via `aiClient.command(request)`.
+- Preview seguro das ações via `@opencut-studio/ai-editor-adapter`.
+
 ## Próximas etapas
 
-1. Adicionar o `package.json` da raiz para declarar `packages/*` como workspace.
-2. Integrar `packages/ai-client` no OpenCut.
-3. Criar um indicador visual usando `aiClient.health()`.
-4. Integrar `/api/transcribe`.
-5. Integrar `/api/llm/command` com preview.
-6. Criar um adaptador de ações para traduzir comandos de IA em ações reais da timeline.
-7. Reduzir gradualmente o papel do frontend Next.js do OpenCut-AI.
+1. Mapear ou criar a primeira API real de timeline dentro do OpenCut.
+2. Transformar previews validados em comandos aplicáveis.
+3. Exigir confirmação explícita antes de modificar a timeline.
+4. Migrar os wrappers locais para imports diretos dos pacotes compartilhados quando a estrutura estiver estável.
+5. Reduzir gradualmente o papel do frontend Next.js do OpenCut-AI.
 
 ## Status
 
 - [x] OpenCut e OpenCut-AI unidos na `main`
 - [x] Estrutura documentada
+- [x] Workspace `pnpm` declarado
 - [x] `packages/ai-types` criado
 - [x] `packages/ai-client` criado
-- [ ] Workspace da raiz declarado
-- [ ] `ai-client` integrado ao OpenCut
-- [ ] Primeiro painel de IA integrado ao editor
-- [ ] Adaptador de ações da timeline implementado
+- [x] `packages/ai-editor-adapter` criado
+- [x] `ai-client` integrado ao OpenCut
+- [x] Primeiro painel de IA integrado ao editor
+- [x] Transcrição integrada em primeira versão
+- [x] Comandos de IA integrados em primeira versão
+- [x] Preview/validação de ações integrado
+- [ ] Aplicação real de ações na timeline
