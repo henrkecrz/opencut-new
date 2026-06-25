@@ -192,7 +192,20 @@ Observação: enquanto o workspace da raiz não estiver ativo, a transcrição u
 
 ## Fase 6 — Integrar comandos de IA
 
-Próxima etapa.
+Status: concluído em primeira versão local.
+
+Criado no editor principal:
+
+```txt
+OpenCut/apps/web/src/ai/ai-command.ts
+OpenCut/apps/web/src/components/ai/ai-command-panel.tsx
+```
+
+A rota inicial foi atualizada:
+
+```txt
+OpenCut/apps/web/src/routes/index.tsx
+```
 
 Endpoint usado:
 
@@ -200,27 +213,29 @@ Endpoint usado:
 POST /api/llm/command
 ```
 
-Fluxo:
+Fluxo implementado:
 
 ```txt
 comando em linguagem natural
 ↓
-backend LLM
+requestAICommand(command)
 ↓
 ações estruturadas
 ↓
 preview no editor
 ↓
-usuário confirma
-↓
-adaptador aplica na timeline
+nenhuma ação aplicada automaticamente
 ```
 
 Regra importante:
 
 A IA nunca deve aplicar mudanças automaticamente sem preview ou confirmação.
 
+Observação: enquanto o workspace da raiz não estiver ativo, os comandos usam um client local mínimo. Depois, eles devem ser substituídos por `@opencut-studio/ai-client`.
+
 ## Fase 7 — Criar AI Action Adapter
+
+Próxima etapa.
 
 Local recomendado:
 
