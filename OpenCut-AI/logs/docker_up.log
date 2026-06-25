@@ -1,0 +1,5 @@
+time="2026-06-25T02:02:37-03:00" level=warning msg="The \"FREESOUND_CLIENT_ID\" variable is not set. Defaulting to a blank string."
+time="2026-06-25T02:02:37-03:00" level=warning msg="The \"FREESOUND_API_KEY\" variable is not set. Defaulting to a blank string."
+time="2026-06-25T02:02:37-03:00" level=warning msg="The \"FREESOUND_CLIENT_ID\" variable is not set. Defaulting to a blank string."
+time="2026-06-25T02:02:37-03:00" level=warning msg="The \"FREESOUND_API_KEY\" variable is not set. Defaulting to a blank string."
+unable to get image 'opencut-ai-web': error during connect: Get "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.51/images/opencut-ai-web/json": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.

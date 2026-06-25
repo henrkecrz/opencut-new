@@ -1,0 +1,12 @@
+time="2026-06-25T02:02:35-03:00" level=warning msg="The \"FREESOUND_CLIENT_ID\" variable is not set. Defaulting to a blank string."
+time="2026-06-25T02:02:35-03:00" level=warning msg="The \"FREESOUND_API_KEY\" variable is not set. Defaulting to a blank string."
+time="2026-06-25T02:02:35-03:00" level=warning msg="The \"FREESOUND_CLIENT_ID\" variable is not set. Defaulting to a blank string."
+time="2026-06-25T02:02:35-03:00" level=warning msg="The \"FREESOUND_API_KEY\" variable is not set. Defaulting to a blank string."
+error during connect: Head "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/_ping": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+
+time="2026-06-25T02:03:59-03:00" level=warning msg="The \"FREESOUND_CLIENT_ID\" variable is not set. Defaulting to a blank string."
+time="2026-06-25T02:04:00-03:00" level=warning msg="The \"FREESOUND_API_KEY\" variable is not set. Defaulting to a blank string."
+time="2026-06-25T02:04:00-03:00" level=warning msg="The \"FREESOUND_CLIENT_ID\" variable is not set. Defaulting to a blank string."
+time="2026-06-25T02:04:00-03:00" level=warning msg="The \"FREESOUND_API_KEY\" variable is not set. Defaulting to a blank string."
+request returned 500 Internal Server Error for API route and version http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/_ping, check if the server supports the requested API version
+
