@@ -130,7 +130,6 @@ if errorlevel 1 (
 echo [INFO] Aguardando Ollama responder...
 call :wait_url "%OLLAMA_URL%" "Ollama" 60
 if errorlevel 1 (
-  popd
   echo [AVISO] Ollama ainda nao respondeu. O backend pode demorar mais na primeira execucao.
 ) else (
   echo [OK] Ollama ativo.
