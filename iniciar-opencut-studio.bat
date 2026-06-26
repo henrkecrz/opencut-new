@@ -10,7 +10,7 @@ set "DEFAULT_MODEL=llama3.2:1b"
 set "MODE=%~1"
 set "PNPM_CMD="
 
-if "%MODE%"=="" set "MODE=core"
+if "%MODE%"=="" set "MODE=web"
 
 title OpenCut Studio - Preparar e iniciar
 
@@ -99,13 +99,23 @@ if errorlevel 1 (
 )
 echo [OK] Dependencias instaladas.
 
-echo.
-if /I "%MODE%"=="full" (
+if /I "%MODE%"=="web" (
+  echo [INFO] Modo WEB selecionado. Apenas o frontend sera iniciado.
+  echo [INFO] Para ativar IA local, configure chaves de API na interface do editor
+  echo [INFO] ou execute: iniciar-opencut-studio.bat core
+  goto :skip_docker
+)
+
+if /I "%MODE%"=="core" (
+  set "COMPOSE_SERVICES=ollama ai-backend whisper-service"
+  echo [INFO] Modo CORE selecionado. Subindo Ollama, AI Backend e Whisper.
+) else if /I "%MODE%"=="full" (
   set "COMPOSE_SERVICES=ollama ai-backend whisper-service tts-service image-service speaker-service face-service clip-service turboquant-service"
   echo [INFO] Modo FULL selecionado. Isso pode consumir bastante memoria e baixar modelos grandes.
 ) else (
-  set "COMPOSE_SERVICES=ollama ai-backend whisper-service"
-  echo [INFO] Modo CORE selecionado. Subindo Ollama, AI Backend e Whisper.
+  echo [ERRO] Modo desconhecido: %MODE%
+  pause
+  exit /b 1
 )
 
 echo [INFO] Iniciando servicos Docker do OpenCut-AI...
@@ -145,6 +155,8 @@ if errorlevel 1 (
 )
 popd
 
+:skip_docker
+
 echo.
 echo [INFO] Iniciando OpenCut Studio Web em %WEB_URL% ...
 start "OpenCut Studio Web" cmd /k "cd /d ""%ROOT%OpenCut\apps\web"" && set ""VITE_AI_BACKEND_URL=%AI_URL%"" && call %PNPM_CMD% dev --host 127.0.0.1"
@@ -167,8 +179,10 @@ echo ============================================================
 echo  Web:        %WEB_URL%
 echo  AI Backend: %AI_URL%/health
 echo.
-echo  Para modo completo, rode:
-echo  iniciar-opencut-studio.bat full
+echo  Modos disponiveis:
+echo    (sem argumento) - Apenas frontend web (IA via API keys na interface)
+echo    core            - Frontend + servicos locais de IA (Ollama, Whisper)
+echo    full            - Frontend + todos os servicos de IA locais
 echo.
 echo  Para parar os containers:
 echo  cd OpenCut-AI ^&^& docker compose down
