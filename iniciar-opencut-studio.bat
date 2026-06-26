@@ -8,6 +8,7 @@ set "AI_URL=http://localhost:8420"
 set "OLLAMA_URL=http://localhost:11434/api/tags"
 set "DEFAULT_MODEL=llama3.2:1b"
 set "MODE=%~1"
+set "PNPM_CMD="
 
 if "%MODE%"=="" set "MODE=core"
 
@@ -34,25 +35,12 @@ if errorlevel 1 goto :fail
 for /f "tokens=*" %%v in ('node --version 2^>nul') do set "NODE_VERSION=%%v"
 echo [OK] Node.js encontrado: %NODE_VERSION%
 
-where pnpm >nul 2>nul
-if errorlevel 1 (
-  echo [INFO] pnpm nao encontrado. Tentando ativar via Corepack...
-  where corepack >nul 2>nul
-  if errorlevel 1 (
-    echo [ERRO] Corepack nao encontrado.
-    echo        Instale Node.js LTS recente ou instale pnpm manualmente:
-    echo        npm install -g pnpm
-    pause
-    exit /b 1
-  )
-  corepack enable
-  corepack prepare pnpm@latest --activate
-)
-
-call :check_command pnpm "pnpm"
+call :ensure_pnpm
 if errorlevel 1 goto :fail
-for /f "tokens=*" %%v in ('pnpm --version 2^>nul') do set "PNPM_VERSION=%%v"
-echo [OK] pnpm encontrado: %PNPM_VERSION%
+
+for /f "tokens=*" %%v in ('%PNPM_CMD% --version 2^>nul') do set "PNPM_VERSION=%%v"
+echo [OK] pnpm pronto: %PNPM_VERSION%
+echo [INFO] Comando pnpm usado: %PNPM_CMD%
 
 call :check_command docker "Docker"
 if errorlevel 1 goto :fail
@@ -96,10 +84,10 @@ if errorlevel 1 goto :fail
 
 echo.
 echo [INFO] Instalando dependencias do workspace...
-pnpm install
+call %PNPM_CMD% install
 if errorlevel 1 (
   echo [AVISO] Instalacao na raiz falhou. Tentando instalar pelo app web...
-  pnpm --dir "OpenCut\apps\web" install
+  call %PNPM_CMD% --dir "OpenCut\apps\web" install
   if errorlevel 1 (
     echo [ERRO] Falha ao instalar dependencias.
     pause
@@ -156,7 +144,7 @@ popd
 
 echo.
 echo [INFO] Iniciando OpenCut Studio Web em %WEB_URL% ...
-start "OpenCut Studio Web" cmd /k "cd /d ""%ROOT%OpenCut\apps\web"" && set ""VITE_AI_BACKEND_URL=%AI_URL%"" && pnpm dev --host 127.0.0.1"
+start "OpenCut Studio Web" cmd /k "cd /d ""%ROOT%OpenCut\apps\web"" && set ""VITE_AI_BACKEND_URL=%AI_URL%"" && call %PNPM_CMD% dev --host 127.0.0.1"
 
 echo [INFO] Aguardando app web responder...
 call :wait_url "%WEB_URL%" "OpenCut Web" 60
@@ -190,6 +178,49 @@ exit /b 0
 where %~1 >nul 2>nul
 if errorlevel 1 (
   echo [ERRO] %~2 nao encontrado no PATH.
+  exit /b 1
+)
+exit /b 0
+
+:ensure_pnpm
+where pnpm >nul 2>nul
+if not errorlevel 1 (
+  set "PNPM_CMD=pnpm"
+  exit /b 0
+)
+
+echo [INFO] pnpm nao encontrado no PATH.
+echo [INFO] Evitando Corepack em C:\Program Files para nao exigir Administrador.
+
+where npm >nul 2>nul
+if not errorlevel 1 (
+  set "NPM_USER_PREFIX=%APPDATA%\npm"
+  if not exist "!NPM_USER_PREFIX!" mkdir "!NPM_USER_PREFIX!" >nul 2>nul
+  echo [INFO] Tentando instalar pnpm no perfil do usuario: !NPM_USER_PREFIX!
+  call npm config set prefix "!NPM_USER_PREFIX!" --location=user >nul 2>nul
+  call npm install -g pnpm --prefix "!NPM_USER_PREFIX!"
+  if not errorlevel 1 (
+    set "PATH=!NPM_USER_PREFIX!;!PATH!"
+    where pnpm >nul 2>nul
+    if not errorlevel 1 (
+      set "PNPM_CMD=pnpm"
+      exit /b 0
+    )
+  )
+)
+
+echo [AVISO] Nao foi possivel instalar pnpm globalmente no perfil do usuario.
+echo [INFO] Usando fallback sem instalacao global: npx --yes pnpm@latest
+where npx >nul 2>nul
+if errorlevel 1 (
+  echo [ERRO] npx nao encontrado. Reinstale o Node.js com npm incluido.
+  exit /b 1
+)
+
+set "PNPM_CMD=npx --yes pnpm@latest"
+call %PNPM_CMD% --version >nul 2>nul
+if errorlevel 1 (
+  echo [ERRO] Nao foi possivel executar pnpm via npx.
   exit /b 1
 )
 exit /b 0
