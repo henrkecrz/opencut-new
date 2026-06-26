@@ -1,0 +1,18 @@
+{
+  "name": "opencut-studio",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "scripts": {
+    "install:all": "pnpm install",
+    "web:dev": "pnpm --dir OpenCut/apps/web dev --host 127.0.0.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "workerd",
+      "lightningcss"
+    ]
+  }
+}
