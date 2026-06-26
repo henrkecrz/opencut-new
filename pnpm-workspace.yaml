@@ -1,3 +1,8 @@
 packages:
   - "packages/*"
   - "OpenCut/apps/*"
+allowBuilds:
+  esbuild: true
+  sharp: true
+  workerd: true
+  lightningcss: true

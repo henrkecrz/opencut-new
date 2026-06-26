@@ -83,6 +83,9 @@ call :prepare_env_files
 if errorlevel 1 goto :fail
 
 echo.
+echo [INFO] Aprovando scripts de build (esbuild, sharp, workerd)...
+call %PNPM_CMD% approve-builds esbuild sharp workerd lightningcss 2>nul
+
 echo [INFO] Instalando dependencias do workspace...
 call %PNPM_CMD% install
 if errorlevel 1 (
