@@ -5,7 +5,13 @@ import logging
 
 from fastapi import APIRouter, HTTPException
 
-from app.models.command import CommandRequest, CommandResponse, EditorAction
+from app.models.command import CommandRequest
+from app.services.llm_provider_settings import (
+    UpdateLLMProviderSettings,
+    get_static_free_models,
+    public_llm_provider_settings,
+    save_llm_provider_settings,
+)
 from app.services.model_backend import llm_backend
 from app.services.stream_utils import streamed_llm_response
 
@@ -49,6 +55,37 @@ Respond with ONLY a JSON object in this format:
 """
 
 
+@router.get("/providers/settings")
+async def get_provider_settings() -> dict:
+    """Return selected LLM provider settings without exposing stored secrets."""
+    return public_llm_provider_settings().model_dump()
+
+
+@router.post("/providers/settings")
+async def update_provider_settings(request: UpdateLLMProviderSettings) -> dict:
+    """Save local provider selection and API key for free external models."""
+    if request.provider in {"opencode", "openrouter"}:
+        allowed = [model.id for model in get_static_free_models(request.provider)]
+        if request.model not in allowed:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Only free {request.provider} models are allowed. Available: {allowed}",
+            )
+    return save_llm_provider_settings(request).model_dump()
+
+
+@router.get("/providers/models")
+async def get_provider_models() -> dict:
+    """Return free model catalog and reasoning levels supported by the UI."""
+    return {
+        "providers": {
+            "opencode": [model.model_dump() for model in get_static_free_models("opencode")],
+            "openrouter": [model.model_dump() for model in get_static_free_models("openrouter")],
+        },
+        "levels": ["low", "medium", "max"],
+    }
+
+
 @router.post("/command")
 async def process_command(request: CommandRequest):
     """Process a natural-language editing command.
@@ -61,7 +98,7 @@ async def process_command(request: CommandRequest):
     if not available:
         raise HTTPException(
             status_code=503,
-            detail="No LLM backend available. Start Ollama or TurboQuant service.",
+            detail="No LLM backend available. Start Ollama/TurboQuant or configure OpenCode/OpenRouter.",
         )
 
     prompt_parts = [f"User command: {request.command}"]
